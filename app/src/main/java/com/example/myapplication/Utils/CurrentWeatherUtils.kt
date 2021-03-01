@@ -1,8 +1,10 @@
-package com.example.myapplication
+package com.example.myapplication.Utils
 
 import androidx.annotation.DrawableRes
+import com.example.myapplication.R
 
 object CurrentWeatherUtils {
+
     @DrawableRes
     fun getWeatherIconResId(weatherConditionId: Int): Int {
         return when (weatherConditionId) {

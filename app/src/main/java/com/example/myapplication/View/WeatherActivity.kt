@@ -1,7 +1,8 @@
-package com.example.myapplication
+package com.example.myapplication.View
 
 
-import com.example.myapplication.CurrentWeatherUtils.getWeatherIconResId
+import Model.CurrentWeather
+import com.example.myapplication.Utils.CurrentWeatherUtils.getWeatherIconResId
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.os.Bundle
@@ -11,24 +12,29 @@ import android.widget.ImageView
 
 import android.view.View
 import android.widget.*
+import com.example.myapplication.Networking.CurrentWeatherCallback
+import com.example.myapplication.Networking.CurrentWeatherService
+import com.example.myapplication.R
 
 import java.lang.Exception
 
 class WeatherActivity : AppCompatActivity() {
 
 
-    private var currentWeatherService: CurrentWeatherService? = null
-    private var weatherContainer: View? = null
-    private var weatherProgressBar: ProgressBar? = null
-    private var temperature: TextView? = null
-    private var location: TextView? = null
-    private var weatherCondition: TextView? = null
-    private var weatherConditionIcon: ImageView? = null
-    private var locationField: EditText? = null
-    private var fab: FloatingActionButton? = null
-    private var fetchingWeather = false
+    private lateinit var currentWeatherService: CurrentWeatherService
+    private lateinit var weatherContainer: View
+    private lateinit var weatherProgressBar: ProgressBar
+    private lateinit var temperature: TextView
+    private lateinit var location: TextView
+    private lateinit var weatherCondition: TextView
+    private lateinit var weatherConditionIcon: ImageView
+    private lateinit var locationField: EditText
+    private lateinit var fab: FloatingActionButton
+    private var fetchingWeather: Boolean = false
     private var textCount = 0
     private var currentLocation = "London"
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.weather_activity)
@@ -80,19 +86,19 @@ class WeatherActivity : AppCompatActivity() {
     private fun searchForWeather(location: String) {
         toggleProgress(true)
         fetchingWeather = true
-        currentWeatherService!!.getCurrentWeather(location, currentWeatherCallback)
+        currentWeatherService.getCurrentWeather(location, currentWeatherCallback)
     }
 
     private fun toggleProgress(showProgress: Boolean) {
-        weatherContainer!!.visibility = if (showProgress) View.GONE else View.VISIBLE
-        weatherProgressBar!!.visibility = if (showProgress) View.VISIBLE else View.GONE
+        weatherContainer.visibility = if (showProgress) View.GONE else View.VISIBLE
+        weatherProgressBar.visibility = if (showProgress) View.VISIBLE else View.GONE
     }
 
     private val currentWeatherCallback: CurrentWeatherCallback = object : CurrentWeatherCallback {
         override fun onCurrentWeather(currentWeather: CurrentWeather) {
             currentLocation = currentWeather.location
-            temperature!!.text = currentWeather.tempFahrenheit.toString()
-            location!!.text = currentWeather.location
+            temperature.text = currentWeather.tempFahrenheit.toString()
+            location.text = currentWeather.location
             weatherCondition!!.text = currentWeather.weatherCondition
             weatherConditionIcon!!.setImageResource(getWeatherIconResId(currentWeather.conditionId))
             toggleProgress(false)

@@ -8,7 +8,7 @@
              android:gravity="center_horizontal"
              android:paddingLeft="16dp"
              android:paddingRight="16dp"
-             tools:context=".WeatherActivity">
+             tools:context=".View.WeatherActivity">
 
     <LinearLayout
             android:id="@+id/weather_container"
@@ -41,7 +41,7 @@
                 android:id="@+id/location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="London"
+                android:text="City"
                 android:textColor="@color/white"
                 android:textSize="36sp" />
 

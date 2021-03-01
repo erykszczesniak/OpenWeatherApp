@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.Networking
 
 import android.app.Activity
 import com.android.volley.Request;
@@ -6,6 +6,7 @@ import com.android.volley.RequestQueue;
 
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import Model.CurrentWeather
 
 import org.json.JSONException;
 import org.json.JSONObject;

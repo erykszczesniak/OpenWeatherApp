@@ -1,4 +1,6 @@
-package com.example.myapplication
+package com.example.myapplication.Networking
+
+import Model.CurrentWeather
 
 interface CurrentWeatherCallback {
     fun onCurrentWeather(currentWeather: CurrentWeather)

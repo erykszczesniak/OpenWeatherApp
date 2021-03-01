@@ -1,4 +1,4 @@
-package com.example.myapplication
+package Model
 
 class CurrentWeather(val location: String,
                      val conditionId: Int,
